@@ -1,2 +1,1 @@
-DS_Store
-.idea/
+What is your name 
