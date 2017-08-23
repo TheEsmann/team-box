@@ -12,7 +12,7 @@ import ssl
 
 app = Flask(__name__)
 
-connections_string = "postgresql://postgres:test@localhost/postgres"
+connections_string = os.environ['DATABASE_URL']
 
 def check_auth(username, password):
     """This function is called to check if a username /
