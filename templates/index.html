@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block title %}Home page{% endblock %}
+
+{%  block content %}
+<h1> Smart Room  </h1>
+<h4> Fan Temp: {{temperature}}&deg;C </h4>
+<h4> Current Fan State: OFF </h4>
+<h4> Current LED State: <span id="state1">OFF</span></h4>
+<button id="button" onclick="myFunction()">Turn ON</button>
+<p>
+{% if temperature > 35 %}
+   It Is Hot
+{% elif temperature <= 35 and temperature > 25 %}
+   It Is Warm
+{% else %}
+   It Is Cold
+{%  endif %}
+
+<span> <h4>The Highest Temperature Is: </h4><h4>{{ highest.temperature }}</h4></span>
+<span> <h4>The Lowest Temperature Is: </h4><h4>{{ lowest.temperature }}</h4></span>
+
+
+</p>
+<div>
+
+<table>
+    <thead>
+    <th>Date</th>
+    <th>temperature</th>
+    </thead>
+    <tbody>
+    {% for record in records %}
+    <tr>
+        <td>{{ record.reading_date }}</td>
+        <td>{{ record.temperature }}</td>
+    </tr>
+        {% else %}
+       <tr>
+           <td colspan="2">There is no data</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</div>
+<p> What we are trying to do is make a smart room that will keep track of the tempature in the room,
+    how much co2 is in the room, how much oxygen is in the room, If there is to much co2 in the room
+    then it will tell you to open the window or close the window.<br>The smart room will have a motion sensor
+    at the door so that if you walk in the room the tempature sensor will check if it is to hot or to cold.
+    The Smart Room will also be able to check the tempature when you aren't in the room or even home,
+    then the tempature sensors will check if it is to hot in the room and if it is then the smart room
+    will turn on the air condition and cool the room down and if it then gets to cold it will trun of the air conditioning </p>
+<br>
+
+
+<script
+src="http://code.jquery.com/jquery-3.2.1.min.js"
+ integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+ crossorigin="anonymous"></script>
+<script>
+function myFunction() {
+  var myButton = document.getElementById("button");
+    var currentStateElement = document.getElementById('state1');
+  if (myButton.innerText == "Turn ON") {
+    myButton.innerText = "Turn OFF";
+    $.post("/led",{arg: "on" } );
+    currentStateElement.innerText = "ON"
+  } else {
+      myButton.innerText = "Turn ON";
+      $.post('/led',{arg: "off" } );
+      currentStateElement.innerText = "OFF"
+  }
+}
+function refresh() {
+    var myButton = document.getElementById("button");
+  $.getJSON("/ledtstate",
+  function(data){
+    console.log(data)
+    var currentState = data.result;
+    console.log(currentState);
+    var currentStateElement = document.getElementById('state1');
+    if(currentState === 0){
+      myButton.innerText = "Turn ON"
+      currentStateElement.innerText = "OFF"
+    } else {
+      myButton.innerText = "Turn OFF"
+      currentStateElement.innerText = "ON"
+
+   }
+ })
+}
+
+
+$(document).ready(refresh)
+  </script>
+
+{% endblock %}

@@ -1,0 +1,48 @@
+p{
+  color:white;
+  font-size:20px;
+  font-style:oblique;
+
+}
+
+h1 {
+  color:white;
+  font-size:60px;
+ text-align: center;
+}
+h4 {
+  color:white;
+  font-size:20px;
+  font-style:italic;
+}
+
+body  {
+  background-color: black;
+}
+table, th, td {
+    border: 2px solid White;
+  }
+
+
+hr{
+  color:white;
+  font-size:20px
+
+}
+
+th{
+  color:white;
+}
+
+td{
+  color:white;
+}
+br{
+  color:white;
+}
+a{
+  color:white;
+}
+span{
+  border:solid 3px red;
+}

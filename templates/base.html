@@ -1,0 +1,22 @@
+<!DOCTYPE>
+<html>
+<head>
+<title> Smart Room </title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}"/>
+</head>
+<body>
+<div>
+  <a href="/">Home</a>
+  <a href="/about">About</a>
+  <a href="/me"> Me</a>
+    <a href="/form">Form</a>
+  </div>
+
+{% block content %}{% endblock %}
+
+{% include 'footer.html' %}
+
+
+</body>
+</html>

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<form  method="post" action="/handle">
+    Temperature: <input type="text" name="temperature"/><br/>
+    <input type="submit" value="Send"/>
+</form>
+
+{% endblock %}
