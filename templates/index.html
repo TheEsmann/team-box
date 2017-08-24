@@ -73,7 +73,7 @@ function myFunction() {
 }
 function refresh() {
     var myButton = document.getElementById("button");
-  $.getJSON("/ledtstate",
+  $.getJSON("/ledstate",
   function(data){
     console.log(data)
     var currentState = data.result;
