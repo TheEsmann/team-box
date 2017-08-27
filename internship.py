@@ -116,7 +116,7 @@ def ledstate():
 
 @app.template_filter('format_date')
 def reverse_filter(record_date):
-    return record_date.strftime('%y-%m_%d %H:%M')
+    return record_date.strftime('%Y-%m-%d %H:%M')
 
 
 
