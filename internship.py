@@ -79,7 +79,7 @@ def me():
 @requires_auth
 def handle():
     temperature = request.form['temperature']
-    current_date = datetime.date.today().isoformat()
+    current_date = datetime.datetime.now().isoformat()
     conn = psycopg2.connect(connections_string)
     cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
@@ -96,7 +96,7 @@ def handle():
 @requires_auth
 def form():
      return render_template('form.html')
-
+     
 
 @app.route('/led', methods=['POST'])
 def led():
@@ -114,6 +114,9 @@ def ledstate():
     gcontext = ssl.SSLContext(ssl.PROTOCOL_TLSv1)
     return urlopen(url, context=gcontext).read()
 
+@app.template_filter('format_date')
+def reverse_filter(record_date):
+    return record_date.strftime('%y-%m_%d %H:%M')
 
 
 
